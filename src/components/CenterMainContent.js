@@ -34,9 +34,16 @@ function CenterMainContent() {
 
         onSnapshot(taskColRef, (snapshot) => {
           setpendingCount(snapshot.docs.length)
-
+          // snapshot.docs.map(doc => {
+          //   console.log('LOG 1', doc.data().taskTime);
+          //   return doc.data();
+          // });
           setcardlistP(snapshot.docs.map(doc => ({
-
+           // taskTime: new Intl.DateTimeFormat('en-US', {hour: '2-digit', minute: '2-digit', second: '2-digit'}).format(doc.data().taskTime),
+            //taskDate: new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit'}).format(doc.data().taskDate),
+           
+            taskTime: new Date(doc.data().taskTime.toDate()).toLocaleString('en-US', {hour: '2-digit', minute: '2-digit', second: '2-digit'}),
+            taskDate: new Date(doc.data().taskDate.toDate()).toLocaleString('en-GB', {year: 'numeric', month: '2-digit',day: '2-digit'}),
             id: doc.id,
             data: doc.data()
           }))
@@ -63,8 +70,9 @@ function CenterMainContent() {
         setcompletedCount(snapshot.docs.length)
 
         setcardlistC(snapshot.docs.map(doc => ({
-
-          id: doc.id,
+          taskTime: new Date(doc.data().taskTime.toDate()).toLocaleString('en-US', {hour: '2-digit', minute: '2-digit', second: '2-digit'}),
+          taskDate: new Date(doc.data().taskDate.toDate()).toLocaleString('en-US', {year: 'numeric', month: '2-digit',day: '2-digit'}),
+        id: doc.id,
           data: doc.data()
         }))
         )
@@ -144,7 +152,7 @@ function CenterMainContent() {
 
                                 cardlistsP.map(
                                   cardlistp => (
-                                    <TodoList key={cardlistp.id} taskid={cardlistp.id} taskimportant={cardlistp.data.taskimportant} taskcompleted={cardlistp.data.taskcompleted} taskname={cardlistp.data.taskname} tasktime={cardlistp.data.taskTime} taskdate={cardlistp.data.taskDate} taskdes={cardlistp.data.taskdes} />
+                                    <TodoList key={cardlistp.id} taskid={cardlistp.id} taskimportant={cardlistp.data.taskimportant} taskcompleted={cardlistp.data.taskcompleted} taskname={cardlistp.data.taskname} tasktime={cardlistp.taskTime} taskdate={cardlistp.taskDate} taskdes={cardlistp.data.taskdes} />
                                   )
                                 )}
 
@@ -171,7 +179,7 @@ function CenterMainContent() {
 
                           cardlistsC.map(
                             cardlistc => (
-                              <TodoList key={cardlistc.id} taskimportant={cardlistc.data.taskimportant} taskid={cardlistc.id} taskcompleted={cardlistc.data.taskcompleted} taskname={cardlistc.data.taskname} tasktime={cardlistc.data.taskTime} taskdate={cardlistc.data.taskDate} taskdes={cardlistc.data.taskdes} />
+                              <TodoList key={cardlistc.id} taskimportant={cardlistc.data.taskimportant} taskid={cardlistc.id} taskcompleted={cardlistc.data.taskcompleted} taskname={cardlistc.data.taskname} tasktime={cardlistc.taskTime} taskdate={cardlistc.taskDate} taskdes={cardlistc.data.taskdes} />
                             )
                           )}
                       </React.Fragment>

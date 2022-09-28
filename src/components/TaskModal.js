@@ -61,11 +61,11 @@ function TaskModal({ modalClose }) {
             taskcompleted: false,
             taskimportant: false,
             createdat: Timestamp.now(),
-           // taskTime: tTime.toString(),
+            taskTime: tTime,
+          taskDate : tdate,
+          //taskTime: new Intl.DateTimeFormat('en-US', {hour: '2-digit', minute: '2-digit', second: '2-digit'}).format(tTime),
           //taskDate : tdate.toString(),
-          taskTime: new Intl.DateTimeFormat('en-US', {hour: '2-digit', minute: '2-digit', second: '2-digit'}).format(tTime),
-          //taskDate : tdate.toString(),
-          taskDate :   new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit'}).format(tdate)
+         // taskDate :   new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit'}).format(tdate)
         }).then(         
               // console.log({
               //   userid: user.uid,
@@ -124,7 +124,7 @@ function TaskModal({ modalClose }) {
                 <div className="form-group w-100">
                   
                 <div className="d-flex gap-3"> 
-                <div ><label >Task date</label>  <Calendar className = "w-100" id="icon" value={tdate} onChange={(e) => settdate(e.target.value)} showIcon  showButtonBar  /></div> 
+                <div ><label >Task date</label>  <Calendar className = "w-100" id="icon" value={tdate} onChange={(e) => settdate(e.target.value)} showIcon  showButtonBar dateFormat="dd/mm/yy" /></div> 
                    <div><label >Task time</label> <Calendar className = "w-100 " id="icon" value={tTime} onChange={(e) => settTime(e.target.value)} showIcon icon="pi pi-calendar-times"  timeOnly hourFormat="12"  /></div>
                 
                 </div>
