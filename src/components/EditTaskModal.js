@@ -24,6 +24,8 @@ function EdidTaskModal({ editid, edittasktitle, edittaskdesk, edittasktime, edit
   const [tdes, settdes] = useState(edittaskdesk);
   const [tTime, settTime] = useState(edittasktime);
   const [tdate, settdate] = useState(edittaskdate);
+  const [viewDate, setViewDate] = useState(edittaskdate);
+  const [viewTime, setViewviewTime] = useState(edittasktime);
   const inputref = useRef();
   const [taskErr, settaskErr] = useState(Errormessage);
   //const [modalEventclose, setmodalEventsubmit] = useState(false);
@@ -120,8 +122,8 @@ function EdidTaskModal({ editid, edittasktitle, edittaskdesk, edittasktime, edit
                 <div className="form-group w-100">
 
                   <div className="d-flex gap-3">
-                    <div ><label >Task date </label>  <Calendar className="w-100" id="icon" value={tdate} onChange={(e) => settdate(e.target.value)} showIcon showButtonBar /></div>
-                    <div><label >Task time </label> <Calendar className="w-100 " id="icon" value={tTime} onChange={(e) => settTime(e.target.value)} showIcon icon="pi pi-calendar-times" timeOnly hourFormat="12" /></div>
+                    <div ><label >Task date <b> {viewDate}</b> </label>  <Calendar className="w-100" id="icon" value={tdate} onChange={(e) => settdate(e.target.value)} showIcon showButtonBar /></div>
+                    <div><label >Task time <b>{viewTime} </b></label> <Calendar className="w-100 " id="icon" value={tTime} onChange={(e) => settTime(e.target.value)} showIcon icon="pi pi-calendar-times" timeOnly hourFormat="12" /></div>
 
                   </div>
                   {/* <input type="datetime-local" className="form-control" id="usr" value={tTime} onChange={(e) => settTime(e.target.value)} /> */}

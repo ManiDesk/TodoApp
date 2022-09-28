@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Calendar } from 'primereact/calendar';
 import { addLocale } from 'primereact/api';
 
- const CalendarDemo = () => {
+const CalendarDemo = () => {
     let today = new Date();
     let month = today.getMonth();
     let year = today.getFullYear();
@@ -28,7 +28,8 @@ import { addLocale } from 'primereact/api';
     const [date14, setDate14] = useState(null);
     const [dates1, setDates1] = useState(null);
     const [dates2, setDates2] = useState(null);
-    const [viewDate, setViewDate] = useState(null);
+    const [dates, setDate] = useState(null);
+    const [viewDate, setViewDate] = useState('01/03/1996');
 
     let minDate = new Date();
     minDate.setMonth(prevMonth);
@@ -68,18 +69,17 @@ import { addLocale } from 'primereact/api';
                 <div className="p-fluid grid formgrid">
                     <div className="field col-12 md:col-4">
                         <label htmlFor="basic">Basic</label>
-
+                        <Calendar id="basic" value={date1} onChange={(e) => setDate1(e.value)} />
                         
-<Calendar  viewDate={viewDate} onViewDateChange={(e) => setViewDate(e.value)}></Calendar>
+<Calendar value={dates} onChange={(e) => setDate(e.value)} viewDate={viewDate} onViewDateChange={(e) => setViewDate(e.value)}></Calendar>
  
-                        <Calendar id="basic" value="fgdgd" onChange={(e) => setDate1(e.value)} />
                     </div>
                     <div className="field col-12 md:col-4">
                         <label htmlFor="basic">Date Format</label>
                         <Calendar id="basic" value={date2} onChange={(e) => setDate2(e.value)} dateFormat="mm-dd-yy" />
                     </div>
                     <div className="field col-12 md:col-4">
-                        <label htmlFor="icon">Icon {date3} </label>
+                        <label htmlFor="icon">Icon</label>
                         <Calendar id="icon" value={date3} onChange={(e) => setDate3(e.value)} showIcon />
                     </div>
                     <div className="field col-12 md:col-4">
@@ -133,13 +133,7 @@ import { addLocale } from 'primereact/api';
                 </div>
 
                 <h5>Inline</h5>
-                
-<Calendar value={date1} onChange={(e) => setDate1(e.value)} headerTemplate={() => <label>Custom Button</label> } footerTemplate={() => <div>Footer Content</div>} />
- 
-<Calendar showTime hourFormat="12" value={date1} onChange={(e) => setDate1(e.value)}></Calendar>
-<Calendar showTime hourFormat="24" value={date2} onChange={(e) => setDate2(e.value)}></Calendar>
-<Calendar timeOnly showTime hourFormat="24" value={date3} onChange={(e) => setDate3(e.value)}></Calendar>
- 
+                <Calendar value={date14} onChange={(e) => setDate14(e.value)} inline showWeek />
             </div>
         </div>
     );
