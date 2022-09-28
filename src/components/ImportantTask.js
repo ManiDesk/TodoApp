@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from "react";
 import { collection, query, orderBy, onSnapshot, addDoc, where, Timestamp } from "firebase/firestore"
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useDispatch, useSelector } from 'react-redux';
 import { db, auth } from './FireBase'
 import Header from './Header';
 import LeftSideBox from './LeftSideBox';
@@ -11,18 +10,13 @@ import TodoList from "./TodoList";
 import Loader from "./Loader";
 function ImportantTask() {
     const [user, loading, error] = useAuthState(auth);
-    const navigate = useNavigate();
-    const state = useSelector((state) => state.favItem)
-    const dispatch = useDispatch();
+    const navigate = useNavigate();   
     const [importanttaskP, setImportantTaskP] = useState([]);
     // const [importanttaskC, setImportantTaskC] = useState([]);
     // const [loadingsp, setLoadingsp] = useState(false);
     const [pendingCount, setpendingCount] = useState(0);
     // const [completedCount, setcompletedCount] = useState(0);
-    const impTask = useSelector((state) => {
-        return state.importanttaskItem;
-    });
-    console.log('alert' + impTask)
+
     useEffect(() => {
         if (loading) return;
         if (!user) return navigate("/");
@@ -96,7 +90,7 @@ function ImportantTask() {
 
                                                                     importanttaskP.map(
                                                                         cardlistp => (
-                                                                            <TodoList key={cardlistp.id} taskid={cardlistp.id} taskimportant={cardlistp.data.taskimportant} taskcompleted={cardlistp.data.taskcompleted} taskname={cardlistp.data.taskname} tasktime={cardlistp.data.taskTime} taskdes={cardlistp.data.taskdes} />
+                                                                            <TodoList key={cardlistp.id} taskid={cardlistp.id} taskimportant={cardlistp.data.taskimportant} taskcompleted={cardlistp.data.taskcompleted} taskname={cardlistp.data.taskname} tasktime={cardlistp.data.taskTime} taskdate={cardlistp.data.taskDate}  taskdes={cardlistp.data.taskdes} />
                                                                         )
                                                                     )}
                                                             </React.Fragment>

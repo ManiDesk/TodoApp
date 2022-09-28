@@ -5,7 +5,7 @@ import { db, auth } from './FireBase'
 import TodoList from "./TodoList";
 import Loader from "./Loader";
 import TaskModal from "./TaskModal";
-import { useDispatch, useSelector } from "react-redux";
+
 function CenterMainContent() {
   const [user, loading, error] = useAuthState(auth);
   const [modalOpen, setmodalOpen] = useState(false);
@@ -14,12 +14,7 @@ function CenterMainContent() {
   const [cardlistsC, setcardlistC] = useState([]);
   const [pendingCount, setpendingCount] = useState(0);
   const [completedCount, setcompletedCount] = useState(0);
-  const state = useSelector((state) => state);
-  const dispatch = useDispatch();
-  const mani = useSelector((state) => {
-    return state.tasks;
-  });
-  console.log(mani)
+
   //const [taskErr, settaskErr] = useState(Errormessage);
 
   //const [tasks, setTasks] = useState([])
@@ -149,7 +144,7 @@ function CenterMainContent() {
 
                                 cardlistsP.map(
                                   cardlistp => (
-                                    <TodoList key={cardlistp.id} taskid={cardlistp.id} taskimportant={cardlistp.data.taskimportant} taskcompleted={cardlistp.data.taskcompleted} taskname={cardlistp.data.taskname} tasktime={cardlistp.data.taskTime} taskdes={cardlistp.data.taskdes} />
+                                    <TodoList key={cardlistp.id} taskid={cardlistp.id} taskimportant={cardlistp.data.taskimportant} taskcompleted={cardlistp.data.taskcompleted} taskname={cardlistp.data.taskname} tasktime={cardlistp.data.taskTime} taskdate={cardlistp.data.taskDate} taskdes={cardlistp.data.taskdes} />
                                   )
                                 )}
 
@@ -176,7 +171,7 @@ function CenterMainContent() {
 
                           cardlistsC.map(
                             cardlistc => (
-                              <TodoList key={cardlistc.id} taskimportant={cardlistc.data.taskimportant} taskid={cardlistc.id} taskcompleted={cardlistc.data.taskcompleted} taskname={cardlistc.data.taskname} tasktime={cardlistc.data.taskTime} taskdes={cardlistc.data.taskdes} />
+                              <TodoList key={cardlistc.id} taskimportant={cardlistc.data.taskimportant} taskid={cardlistc.id} taskcompleted={cardlistc.data.taskcompleted} taskname={cardlistc.data.taskname} tasktime={cardlistc.data.taskTime} taskdate={cardlistc.data.taskDate} taskdes={cardlistc.data.taskdes} />
                             )
                           )}
                       </React.Fragment>

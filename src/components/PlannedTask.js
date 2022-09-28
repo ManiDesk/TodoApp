@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from "react";
 import { collection, query, orderBy, onSnapshot, addDoc, where, Timestamp } from "firebase/firestore"
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useDispatch, useSelector } from 'react-redux';
 import { db, auth } from './FireBase'
 import Header from './Header';
 import LeftSideBox from './LeftSideBox';
@@ -11,9 +10,7 @@ import TodoList from "./TodoList";
 import Loader from "./Loader";
 function PlannedTask() {
     const [user, loading, error] = useAuthState(auth);
-    const navigate = useNavigate();
-    const state = useSelector((state) => state.favItem)
-    const dispatch = useDispatch();
+    const navigate = useNavigate();    
     const [importanttaskP, setImportantTaskP] = useState([]);
     // const [importanttaskC, setImportantTaskC] = useState([]);
     // const [loadingsp, setLoadingsp] = useState(false);
@@ -93,7 +90,7 @@ function PlannedTask() {
 
                                                                     importanttaskP.map(
                                                                         cardlistp => (
-                                                                            <TodoList key={cardlistp.id} taskid={cardlistp.id} taskimportant={cardlistp.data.taskimportant} taskcompleted={cardlistp.data.taskcompleted} taskname={cardlistp.data.taskname} tasktime={cardlistp.data.taskTime} taskdes={cardlistp.data.taskdes} />
+                                                                            <TodoList key={cardlistp.id} taskid={cardlistp.id} taskimportant={cardlistp.data.taskimportant} taskcompleted={cardlistp.data.taskcompleted} taskname={cardlistp.data.taskname} tasktime={cardlistp.data.taskTime} taskdate={cardlistp.data.taskDate} taskdes={cardlistp.data.taskdes} />
                                                                         )
                                                                     )}
                                                             </React.Fragment>

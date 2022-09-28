@@ -4,8 +4,13 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, db } from './FireBase'
 // import SuceessMessage from "./auth/SuccessMessage";
 import { toast } from 'react-toastify';
-import { useDispatch, useSelector } from "react-redux";
-import * as TaskAction from '../components/store/action/action'
+//Date picker npm
+import { Calendar } from 'primereact/calendar';
+import 'primereact/resources/themes/lara-light-indigo/theme.css';
+import 'primereact/resources/primereact.css';
+import 'primeflex/primeflex.css';
+import 'primeicons/primeicons.css';
+
 const Errormessage = {
   taskErrMessage: '',
   tasktimedateErrMessage: '',
@@ -13,23 +18,25 @@ const Errormessage = {
 
 }
 function TaskModal({ modalClose }) {
-  const dispatch = useDispatch();
+
 
   const [user, loading, error] = useAuthState(auth);
   // const [modalOpen, setmodalOpen] = useState(false);
-  const [tname, setTname] = useState('');
+  const [tname, setTname] = useState('');  
   const [tdes, settdes] = useState('');
   const [tTime, settTime] = useState('');
+  const [tdate, settdate] = useState('');
   const inputref = useRef();
   const [taskErr, settaskErr] = useState(Errormessage);
   const [errMsg, seterrMsg] = useState({
     errsts: false,
     errmesgname: ''
   });
-  const state = useSelector((state) => state)
+
 
 
   const handleSubmit = async (e) => {
+  
     e.preventDefault()
     if ((tname == '' || tname == undefined && tdes == '' || tdes == undefined)) {
       toast("Please fill the all details");
@@ -44,7 +51,7 @@ function TaskModal({ modalClose }) {
       settaskErr([Errormessage.taskErrMessage = '',
       Errormessage.teskCommetsErrMessage = '']);
       try {
-
+      
 
         if (user) {
           addDoc(collection(db, "nirtodoapp" + user.uid), {
@@ -54,18 +61,23 @@ function TaskModal({ modalClose }) {
             taskcompleted: false,
             taskimportant: false,
             createdat: Timestamp.now(),
-            taskTime: tTime
-          }).then(
-            dispatch(TaskAction.addtotask({
-              userid: user.uid,
-              taskname: tname,
-              taskdes: tdes,
-              taskcompleted: false,
-              taskimportant: false,
-              createdat: Timestamp.now(),
-              taskTime: tTime
-            })),
-
+           // taskTime: tTime.toString(),
+          //taskDate : tdate.toString(),
+          taskTime: new Intl.DateTimeFormat('en-US', {hour: '2-digit', minute: '2-digit', second: '2-digit'}).format(tTime),
+          //taskDate : tdate.toString(),
+          taskDate :   new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit'}).format(tdate)
+        }).then(         
+              // console.log({
+              //   userid: user.uid,
+              //   taskname: tname,
+              //   taskdes: tdes,
+              //   taskcompleted: false,
+              //   taskimportant: false,
+              //   createdat: Timestamp.now(),
+              //   taskTime: new Intl.DateTimeFormat('en-US', {hour: '2-digit', minute: '2-digit', second: '2-digit'}).format(tTime),
+              //   //taskDate : tdate.toString(),
+              //   taskDate :   new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit'}).format(tdate)
+              // }),
             toast.success(tname + ' - ' + "Successfully Added"),
             setTimeout(() => {
 
@@ -110,8 +122,13 @@ function TaskModal({ modalClose }) {
                   <p className="err-msg">{Errormessage.taskErrMessage}</p>
                 </div>
                 <div className="form-group w-100">
-                  <label >Task date with time</label>
-                  <input type="datetime-local" className="form-control" id="usr" value={tTime} onChange={(e) => settTime(e.target.value)} />
+                  
+                <div className="d-flex gap-3"> 
+                <div ><label >Task date</label>  <Calendar className = "w-100" id="icon" value={tdate} onChange={(e) => settdate(e.target.value)} showIcon  showButtonBar  /></div> 
+                   <div><label >Task time</label> <Calendar className = "w-100 " id="icon" value={tTime} onChange={(e) => settTime(e.target.value)} showIcon icon="pi pi-calendar-times"  timeOnly hourFormat="12"  /></div>
+                
+                </div>
+                  {/* <input type="datetime-local" className="form-control" id="usr" value={tTime} onChange={(e) => settTime(e.target.value)} /> */}
 
                 </div>
                 <div className="form-group">

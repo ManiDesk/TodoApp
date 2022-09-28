@@ -13,6 +13,7 @@ import Userslist from './components/auth/uselist';
 import PlannedTask from './components/PlannedTask';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
+import CalendarDemo from './components/Calender';
 function App() {
   return (
     <React.Fragment>
@@ -27,6 +28,7 @@ function App() {
           <Route exact path="/addUser" element={<Addusertask />} />
           
           <Route exact path="/userlist" element={<Userslist />} />
+          <Route exact path="/calender" element={<CalendarDemo />} />
           
         </Routes>
       </Router>

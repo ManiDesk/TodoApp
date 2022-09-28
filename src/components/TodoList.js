@@ -133,7 +133,7 @@ function TodoList(props) {
           <a className="w-100  card-link d-flex align-items-center justify-content-between flex-lg-fill" data-toggle="collapse" href={`#collapseid${props.taskid}`}>
             <div className="nir-card-title">
               {props.taskname}</div>
-            <div className="nir-card-icon"> <span className="nir-card-time">{props.tasktime} </span>
+            <div className="nir-card-icon">{props.taskdate} <span className="nir-card-time">{props.tasktime}  </span>
               <i className="far fa-chevron-down"></i>
             </div>
           </a>
@@ -154,8 +154,8 @@ function TodoList(props) {
         </div>
 
       </div>
-      {modalopensts && <EdidTaskModal modalClose={modalClose} editid={props.taskid} edittasktitle={props.taskname} edittaskdesk={props.taskdes} edittasktime={props.tasktime} />}
-      {delmodalopensts && <DeleteModal modalClose={modalClose} modalDelete={handleDelete} delid={props.taskid} deltaskname={props.taskname} deltaskdesk={props.taskdes} deltasktime={props.tasktime} />}
+      {modalopensts && <EdidTaskModal modalClose={modalClose} editid={props.taskid} edittasktitle={props.taskname} edittaskdesk={props.taskdes} edittasktime={props.tasktime}  edittaskdate={props.taskdate} />}
+      {delmodalopensts && <DeleteModal modalClose={modalClose} modalDelete={handleDelete} delid={props.taskid} deltaskname={props.taskname} deltaskdesk={props.taskdes} deltasktime={props.tasktime} deltaskdate={props.taskdate} />}
     </React.Fragment>
   )
 }

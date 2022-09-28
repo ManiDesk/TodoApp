@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Signinimage from '../../images/signin.png';
 import { toast } from 'react-toastify';
 import * as userActions from "../store/action/action";
-import { useDispatch } from "react-redux";
+
 import {
   auth,
   registerWithEmailAndPassword,
@@ -16,7 +16,7 @@ import SuceessMessage from "./SuccessMessage";
 //import SuceessMessage from "./SuccessMessage";
 
 export default React.memo(function SignUp() {
-  const dispatch = useDispatch();
+  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [phone, setPhone] = useState("");
@@ -46,8 +46,7 @@ export default React.memo(function SignUp() {
 
       }
       else {
-        var text =   dispatch(userActions.addUsers({name,email,phone,password}));
-        console.log(text)
+   
         var registerpart = await registerWithEmailAndPassword(name, email, password, phone ? phone : '');
       
         if (registerpart.status == 'error') {

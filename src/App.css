@@ -345,3 +345,7 @@ body[data-app="nirapp"] .btn-light {
 body[data-app="nirapp"] .Toastify__toast-container {
   z-index: 99999999999999999 !important;
 }
+
+body[data-app="nirapp"] .p-datepicker {
+  z-index: 999999999999999999999999999999 !important;
+}
