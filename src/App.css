@@ -1,11 +1,11 @@
 :root {
-  --nir-body-bg-color : #f3f2f1;
-  --nir-left-box-bg-color : #fff;
-  --nir-list-box-bg-hover-color : #f6f6f5;
-  --nir-list-box-bg-active-color : #ecf6fd;
-  --nir-primary : #4f36ec;
-  --nir-primary-hover : #4a35d1;
-  --nir-danger : red ;
+  --nir-body-bg-color: #f3f2f1;
+  --nir-left-box-bg-color: #fff;
+  --nir-list-box-bg-hover-color: #f6f6f5;
+  --nir-list-box-bg-active-color: #ecf6fd;
+  --nir-primary: #4f36ec;
+  --nir-primary-hover: #4a35d1;
+  --nir-danger: red;
 }
 
 body[data-app="nirapp"] {
@@ -27,18 +27,21 @@ body[data-app="nirapp"] .nir-left-box-list li a {
   grid-gap: 10px;
   text-decoration: none;
 }
-body[data-app="nirapp"] .nir-box{
+
+body[data-app="nirapp"] .nir-box {
   box-shadow: 0px 0.3px 0.9px rgb(0 0 0 / 10%), 0px 1.6px 3.6px rgb(0 0 0 / 10%);
   background: var(--nir-left-box-bg-color);
-  
-}
-body[data-app="nirapp"] .nir-side-box {
-  height: 100vh;
-  
+
 }
 
-body[data-app="nirapp"] .nir-left-box-list li a:hover,body[data-app="nirapp"] .nir-left-box-list li a:focus {
-  background-color: var(--nir-list-box-bg-hover-color) ;
+body[data-app="nirapp"] .nir-side-box {
+  height: 100vh;
+
+}
+
+body[data-app="nirapp"] .nir-left-box-list li a:hover,
+body[data-app="nirapp"] .nir-left-box-list li a:focus {
+  background-color: var(--nir-list-box-bg-hover-color);
 }
 
 body[data-app="nirapp"] .nir-left-box-list li.active a {
@@ -95,60 +98,74 @@ body[data-app="nirapp"] .card.nir-main-add-task-item-add {
 body[data-app="nirapp"] .nir-empty i {
   font-size: 30px;
 }
-body[data-app="nirapp"] .nir-gap{
-  grid-gap:10px;
+
+body[data-app="nirapp"] .nir-gap {
+  grid-gap: 10px;
 }
-body[data-app="nirapp"] .nir-nodata-found{
-  text-align :center;
-  margin:10px 0px;
+
+body[data-app="nirapp"] .nir-nodata-found {
+  text-align: center;
+  margin: 10px 0px;
 
 }
-body[data-app="nirapp"] .err-msg{
-color: var( --nir-danger);
-font-size: 12px;
+
+body[data-app="nirapp"] .err-msg {
+  color: var(--nir-danger);
+  font-size: 12px;
 }
+
 body[data-app="nirapp"] .nir-card-title {
   font-size: 16px;
   color: #333;
   text-transform: capitalize;
   font-weight: 500;
 }
+
 body[data-app="nirapp"] .task--completed {
   border-left: 5px solid green;
 }
+
 body[data-app="nirapp"] .task.task--pending {
   border-left: 5px solid #999;
 }
+
 body[data-app="nirapp"] .nir-card-time {
   font-size: 14px;
   color: #666;
   margin: 0 10px;
 }
+
 body[data-app="nirapp"] .card-footer button.btn {
   min-width: 80px;
   margin-right: 10px;
 }
+
 body[data-app="nirapp"] .nir-card-icon {
   color: #666;
 }
+
 body[data-app="nirapp"] .modal-backdrop {
   display: none;
 }
+
 body[data-app="nirapp"] .modal {
   background-color: #0000008a;
 
   z-index: 999999999;
 }
+
 body[data-app="nirapp"].modal-open {
   overflow: unset !important;
   padding: 0 !important;
 }
+
 body[data-app="nirapp"] .nir-main-add-task-item-list {
   background: #fff;
   padding: 30px;
   border-radius: 5px;
   box-shadow: 0px 0.3px 5px 1px rgb(0 0 0 / 10%), 0px 1.6px 3.6px rgb(0 0 0 / 10%);
 }
+
 /*sign in page*/
 body[data-app="nirapp"] .nir-sign-left {
   height: 100vh;
@@ -157,6 +174,7 @@ body[data-app="nirapp"] .nir-sign-left {
   overflow: hidden;
   z-index: 999999;
 }
+
 body[data-app="nirapp"] .animate {
   height: 100%;
   display: block;
@@ -165,50 +183,50 @@ body[data-app="nirapp"] .animate {
   width: 100%
 }
 
-body[data-app="nirapp"] .animate > li {
+body[data-app="nirapp"] .animate>li {
   position: absolute;
   height: 50px;
   width: 50px;
   top: 100%;
   left: 10px;
-  background-color:  rgba(255,255,255,.1);
+  background-color: rgba(255, 255, 255, .1);
   z-index: -1;
   overflow: hidden;
   animation: move 10s linear infinite
 }
 
-body[data-app="nirapp"] .animate > li:nth-last-of-type(2) {
+body[data-app="nirapp"] .animate>li:nth-last-of-type(2) {
   left: 70px;
   animation-delay: 3.5s;
   height: 15px;
   width: 15px;
 }
 
-body[data-app="nirapp"] .animate > li:nth-last-of-type(3) {
+body[data-app="nirapp"] .animate>li:nth-last-of-type(3) {
   left: 140px;
   animation-delay: 3s
 }
 
-body[data-app="nirapp"] .animate > li:nth-last-of-type(4) {
+body[data-app="nirapp"] .animate>li:nth-last-of-type(4) {
   left: 210px;
   animation-delay: 5.5s
 }
 
-body[data-app="nirapp"] .animate > li:nth-last-of-type(5) {
+body[data-app="nirapp"] .animate>li:nth-last-of-type(5) {
   left: 280px;
   animation-delay: 1.8s;
   height: 65px;
   width: 65px
 }
 
-body[data-app="nirapp"] .animate > li:nth-last-of-type(6) {
+body[data-app="nirapp"] .animate>li:nth-last-of-type(6) {
   left: 140px;
   animation-delay: 6.8s;
   height: 25px;
   width: 25px
 }
 
-body[data-app="nirapp"] .animate > li:nth-last-of-type(7) {
+body[data-app="nirapp"] .animate>li:nth-last-of-type(7) {
   left: 280px;
   animation-delay: 5s;
   height: 35px;
@@ -217,12 +235,16 @@ body[data-app="nirapp"] .animate > li:nth-last-of-type(7) {
 
 
 @keyframes move {
-  to {top: -50px;transform: rotate(360deg)}
+  to {
+    top: -50px;
+    transform: rotate(360deg)
+  }
 }
 
 body[data-app="nirapp"] .nir-auth-section {
   overflow: hidden;
 }
+
 body[data-app="nirapp"] .nir-sign-title h4:before {
   content: '';
   position: absolute;
@@ -234,6 +256,7 @@ body[data-app="nirapp"] .nir-sign-title h4:before {
   left: 0;
   border-radius: 5px;
 }
+
 body[data-app="nirapp"] .nir-sign-title h4 {
   font-size: 30px;
   font-weight: 600;
@@ -244,64 +267,81 @@ body[data-app="nirapp"] .nir-sign-title h4 {
 body[data-app="nirapp"] .btn-primary {
   color: #fff;
   background-color: var(--nir-primary);
-  border-color: var(--nir-primary) ;
+  border-color: var(--nir-primary);
 }
-body[data-app="nirapp"] .btn-primary:hover,body[data-app="nirapp"]  .btn-primary:focus{
+
+body[data-app="nirapp"] .btn-primary:hover,
+body[data-app="nirapp"] .btn-primary:focus {
   color: #fff;
   background-color: var(--nir-primary-hover);
-  border-color: var(--nir-primary-hover) ;
+  border-color: var(--nir-primary-hover);
 }
-body[data-app="nirapp"] .nir-min-w-100p{
+
+body[data-app="nirapp"] .nir-min-w-100p {
   min-width: 100px;
 }
-body[data-app="nirapp"] .text-color-primary{
+
+body[data-app="nirapp"] .text-color-primary {
   color: var(--nir-primary);
 }
+
 body[data-app="nirapp"] .badge-primary {
   color: #fff;
-  background-color:var(--nir-primary);
+  background-color: var(--nir-primary);
 }
+
 body[data-app="nirapp"] .custom-control-input:checked~.custom-control-label::before {
   color: #fff;
   border-color: var(--nir-primary);
   background-color: var(--nir-primary);
 }
+
 body[data-app="nirapp"] .animate {
-  
+
   position: absolute;
   right: 0;
   left: 0;
   margin: auto;
 }
-body[data-app="nirapp"] .btn-outline-primary:hover,body[data-app="nirapp"]  .btn-outline-primary:focus{
-background: var(--nir-primary);
-border-color: var(--nir-primary);
-color:#fff
-}
-body[data-app="nirapp"] .btn-outline-primary,body[data-app="nirapp"]  .btn-outline-primary{
-  color:var(--nir-primary);
+
+body[data-app="nirapp"] .btn-outline-primary:hover,
+body[data-app="nirapp"] .btn-outline-primary:focus {
+  background: var(--nir-primary);
   border-color: var(--nir-primary);
-  }
-  body[data-app="nirapp"] .nir-black{
-    color: #000;
-  }
-  body[data-app="nirapp"] .nav-tabs .nav-link {
-    border-width: 0px;
-    border-bottom: 3px solid transparent;
-    font-weight: 600;
-    color: #333;
+  color: #fff
 }
+
+body[data-app="nirapp"] .btn-outline-primary,
+body[data-app="nirapp"] .btn-outline-primary {
+  color: var(--nir-primary);
+  border-color: var(--nir-primary);
+}
+
+body[data-app="nirapp"] .nir-black {
+  color: #000;
+}
+
+body[data-app="nirapp"] .nav-tabs .nav-link {
+  border-width: 0px;
+  border-bottom: 3px solid transparent;
+  font-weight: 600;
+  color: #333;
+}
+
 body[data-app="nirapp"] .nav-tabs .nav-link.active {
   border-bottom: 3px solid var(--nir-primary);
   color: var(--nir-primary);
   font-weight: 600;
 }
+
 body[data-app="nirapp"] .dropdown-menu {
   margin-left: calc(100% - 14rem);
 }
+
 body[data-app="nirapp"] .btn-light {
   border: 1px solid #ced4da;
 }
+
 body[data-app="nirapp"] .Toastify__toast-container {
   z-index: 99999999999999999 !important;
 }
