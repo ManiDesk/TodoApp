@@ -5,7 +5,7 @@ import { db, auth } from './FireBase'
 import TodoList from "./TodoList";
 import Loader from "./Loader";
 import TaskModal from "./TaskModal";
-import { useDispatch,useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { gettasks, deleteAll } from "./store/action/action";
 function CenterMainContent() {
   const [user, loading, error] = useAuthState(auth);
@@ -15,15 +15,15 @@ function CenterMainContent() {
   const [cardlistsC, setcardlistC] = useState([]);
   const [pendingCount, setpendingCount] = useState(0);
   const [completedCount, setcompletedCount] = useState(0);
- const dispatch = useDispatch();
- const tasks = useSelector((state)=>state.operationsReducer);
- console.log(tasks)
+  const dispatch = useDispatch();
+  const tasks = useSelector((state) => state.operationsReducer);
+  console.log(tasks)
   // firebase
   useEffect(() => {
     dispatch(gettasks())
     //fetchtodoListpending()
     fetchtodoListCompleted()
-  }, [user, loading,dispatch])
+  }, [user, loading, dispatch])
 
   const fetchtodoListpending = () => {
 
@@ -39,11 +39,11 @@ function CenterMainContent() {
           //   return doc.data();
           // });
           setcardlistP(snapshot.docs.map(doc => ({
-           // taskTime: new Intl.DateTimeFormat('en-US', {hour: '2-digit', minute: '2-digit', second: '2-digit'}).format(doc.data().taskTime),
+            // taskTime: new Intl.DateTimeFormat('en-US', {hour: '2-digit', minute: '2-digit', second: '2-digit'}).format(doc.data().taskTime),
             //taskDate: new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit'}).format(doc.data().taskDate),
-           
-           // taskTime: new Date(doc.data().taskTime.toDate()).toLocaleString('en-US', {hour: '2-digit', minute: '2-digit', second: '2-digit'}),
-          //  taskDate: new Date(doc.data().taskDate.toDate()).toLocaleString('en-GB', {year: 'numeric', month: '2-digit',day: '2-digit'}),
+
+            // taskTime: new Date(doc.data().taskTime.toDate()).toLocaleString('en-US', {hour: '2-digit', minute: '2-digit', second: '2-digit'}),
+            //  taskDate: new Date(doc.data().taskDate.toDate()).toLocaleString('en-GB', {year: 'numeric', month: '2-digit',day: '2-digit'}),
             id: doc.id,
             data: doc.data()
           }))
@@ -72,7 +72,7 @@ function CenterMainContent() {
         setcardlistC(snapshot.docs.map(doc => ({
           // taskTime: new Date(doc.data().taskTime.toDate()).toLocaleString('en-US', {hour: '2-digit', minute: '2-digit', second: '2-digit'}),
           // taskDate: new Date(doc.data().taskDate.toDate()).toLocaleString('en-US', {year: 'numeric', month: '2-digit',day: '2-digit'}),
-        id: doc.id,
+          id: doc.id,
           data: doc.data()
         }))
         )
@@ -137,7 +137,7 @@ function CenterMainContent() {
                 {/* <!-- Tab panes --> */}
                 <div className="tab-content">
                   <div id="pending" className="tab-pane active">
-                    {tasks.length < 0 ?(
+                    {tasks.length < 0 ? (
                       <React.Fragment>
                         <p className="nir-nodata-found">No data found</p>
                       </React.Fragment>)
@@ -145,13 +145,13 @@ function CenterMainContent() {
 
                       <React.Fragment>
                         <div>
-                        
+
                           {loadingsp ? <Loader /> :
                             <div>
                               {
 
-                              tasks.map(
-                                task => (
+                                tasks.map(
+                                  task => (
                                     <TodoList key={task.userid} taskid={task.userid} taskimportant={task.taskimportant} taskcompleted={task.taskcompleted} taskname={task.taskname} tasktime={task.taskTime} taskdate={task.taskDate} taskdes={task.taskdes} />
                                   )
                                 )}
