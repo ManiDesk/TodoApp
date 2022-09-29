@@ -21,7 +21,7 @@ function CenterMainContent() {
   // firebase
   useEffect(() => {
     dispatch(gettasks())
-    fetchtodoListpending()
+    //fetchtodoListpending()
     fetchtodoListCompleted()
   }, [user, loading,dispatch])
 
@@ -137,22 +137,22 @@ function CenterMainContent() {
                 {/* <!-- Tab panes --> */}
                 <div className="tab-content">
                   <div id="pending" className="tab-pane active">
-                    {cardlistsP == '' ?
+                    {tasks.length < 0 ?(
                       <React.Fragment>
                         <p className="nir-nodata-found">No data found</p>
-                      </React.Fragment>
+                      </React.Fragment>)
                       :
 
                       <React.Fragment>
                         <div>
-
+                        
                           {loadingsp ? <Loader /> :
                             <div>
                               {
 
-                                cardlistsP.map(
-                                  cardlistp => (
-                                    <TodoList key={cardlistp.id} taskid={cardlistp.id} taskimportant={cardlistp.data.taskimportant} taskcompleted={cardlistp.data.taskcompleted} taskname={cardlistp.data.taskname} tasktime={cardlistp.data.taskTime} taskdate={cardlistp.data.taskDate} taskdes={cardlistp.data.taskdes} />
+                              tasks.map(
+                                task => (
+                                    <TodoList key={task.userid} taskid={task.userid} taskimportant={task.taskimportant} taskcompleted={task.taskcompleted} taskname={task.taskname} tasktime={task.taskTime} taskdate={task.taskDate} taskdes={task.taskdes} />
                                   )
                                 )}
 
