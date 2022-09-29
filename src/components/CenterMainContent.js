@@ -5,7 +5,8 @@ import { db, auth } from './FireBase'
 import TodoList from "./TodoList";
 import Loader from "./Loader";
 import TaskModal from "./TaskModal";
-
+import { useDispatch,useSelector } from 'react-redux'
+import { gettasks, deleteAll } from "./store/action/action";
 function CenterMainContent() {
   const [user, loading, error] = useAuthState(auth);
   const [modalOpen, setmodalOpen] = useState(false);
@@ -14,16 +15,15 @@ function CenterMainContent() {
   const [cardlistsC, setcardlistC] = useState([]);
   const [pendingCount, setpendingCount] = useState(0);
   const [completedCount, setcompletedCount] = useState(0);
-
-  //const [taskErr, settaskErr] = useState(Errormessage);
-
-  //const [tasks, setTasks] = useState([])
-
+ const dispatch = useDispatch();
+ const tasks = useSelector((state)=>state.operationsReducer);
+ console.log(tasks)
   // firebase
   useEffect(() => {
+    dispatch(gettasks())
     fetchtodoListpending()
     fetchtodoListCompleted()
-  }, [user, loading])
+  }, [user, loading,dispatch])
 
   const fetchtodoListpending = () => {
 

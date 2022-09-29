@@ -6,14 +6,11 @@ import Home from './components/Home';
 import SignIn from './components/auth/SignIn';
 import SignUp from './components/auth/SignUp';
 import Reset from './components/auth/Reset';
-import Favourite from './components/favourite';
 import ImportantTask from './components/ImportantTask';
-import Addusertask from './components/auth/addUser';
-import Userslist from './components/auth/uselist';
 import PlannedTask from './components/PlannedTask';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
-import CalendarDemo from './components/Calender';
+
 function App() {
   return (
     <React.Fragment>
@@ -25,11 +22,8 @@ function App() {
           <Route exact path="/home" element={<Home />} />
           <Route exact path="/important" element={<ImportantTask />} />
           <Route exact path="/planned" element={<PlannedTask />} />
-          <Route exact path="/addUser" element={<Addusertask />} />
-          
-          <Route exact path="/userlist" element={<Userslist />} />
-          {/* <Route exact path="/calender" element={<CalendarDemo />} /> */}
-          
+
+
         </Routes>
       </Router>
 

@@ -10,7 +10,7 @@ import TodoList from "./TodoList";
 import Loader from "./Loader";
 function PlannedTask() {
     const [user, loading, error] = useAuthState(auth);
-    const navigate = useNavigate();    
+    const navigate = useNavigate();
     const [importanttaskP, setImportantTaskP] = useState([]);
     // const [importanttaskC, setImportantTaskC] = useState([]);
     // const [loadingsp, setLoadingsp] = useState(false);
@@ -26,7 +26,7 @@ function PlannedTask() {
     const fetchImportantTaskP = () => {
         try {
             if (user) {
-                const taskColRef = query(collection(db, 'nirtodoapp' + user.uid),where("taskTime", "!=", ""),orderBy("taskTime", "asc"))
+                const taskColRef = query(collection(db, 'nirtodoapp' + user.uid), where("taskTime", "!=", ""), orderBy("taskTime", "asc"))
                 onSnapshot(taskColRef, (snapshot) => {
                     setpendingCount(snapshot.docs.length)
 
