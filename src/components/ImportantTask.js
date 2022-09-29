@@ -10,7 +10,7 @@ import TodoList from "./TodoList";
 import Loader from "./Loader";
 function ImportantTask() {
     const [user, loading, error] = useAuthState(auth);
-    const navigate = useNavigate();   
+    const navigate = useNavigate();
     const [importanttaskP, setImportantTaskP] = useState([]);
     // const [importanttaskC, setImportantTaskC] = useState([]);
     // const [loadingsp, setLoadingsp] = useState(false);
@@ -31,9 +31,9 @@ function ImportantTask() {
                     setpendingCount(snapshot.docs.length)
 
                     setImportantTaskP(snapshot.docs.map(doc => ({
-                        taskTime: new Date(doc.data().taskTime.toDate()).toLocaleString('en-US', {hour: '2-digit', minute: '2-digit', second: '2-digit'}),
-            taskDate: new Date(doc.data().taskDate.toDate()).toLocaleString('en-GB', {year: 'numeric', month: '2-digit',day: '2-digit'}),
-            id: doc.id,
+                        // taskTime: new Date(doc.data().taskTime.toDate()).toLocaleString('en-US', {hour: '2-digit', minute: '2-digit', second: '2-digit'}),
+                        //taskDate: new Date(doc.data().taskDate.toDate()).toLocaleString('en-GB', { year: 'numeric', month: '2-digit', day: '2-digit' }),
+                        id: doc.id,
                         data: doc.data()
                     }))
                     )
@@ -91,7 +91,7 @@ function ImportantTask() {
 
                                                                     importanttaskP.map(
                                                                         cardlistp => (
-                                                                            <TodoList key={cardlistp.id} taskid={cardlistp.id} taskimportant={cardlistp.data.taskimportant} taskcompleted={cardlistp.data.taskcompleted} taskname={cardlistp.data.taskname} tasktime={cardlistp.taskTime} taskdate={cardlistp.taskDate}  taskdes={cardlistp.data.taskdes} />
+                                                                            <TodoList key={cardlistp.id} taskid={cardlistp.id} taskimportant={cardlistp.data.taskimportant} taskcompleted={cardlistp.data.taskcompleted} taskname={cardlistp.data.taskname} tasktime={cardlistp.data.taskTime} taskdes={cardlistp.data.taskdes} />
                                                                         )
                                                                     )}
                                                             </React.Fragment>

@@ -28,7 +28,7 @@ function App() {
           <Route exact path="/addUser" element={<Addusertask />} />
           
           <Route exact path="/userlist" element={<Userslist />} />
-          <Route exact path="/calender" element={<CalendarDemo />} />
+          {/* <Route exact path="/calender" element={<CalendarDemo />} /> */}
           
         </Routes>
       </Router>

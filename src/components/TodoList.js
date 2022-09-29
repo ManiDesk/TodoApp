@@ -154,8 +154,8 @@ function TodoList(props) {
         </div>
 
       </div>
-      {modalopensts && <EdidTaskModal modalClose={modalClose} editid={props.taskid} edittasktitle={props.taskname} edittaskdesk={props.taskdes} edittasktime={props.tasktime}  edittaskdate={props.taskdate} />}
-      {delmodalopensts && <DeleteModal modalClose={modalClose} modalDelete={handleDelete} delid={props.taskid} deltaskname={props.taskname} deltaskdesk={props.taskdes} deltasktime={props.tasktime} deltaskdate={props.taskdate} />}
+      {modalopensts && <EdidTaskModal modalClose={modalClose} editid={props.taskid} edittasktitle={props.taskname} edittaskdesk={props.taskdes} edittasktime={props.tasktime}  />}
+      {delmodalopensts && <DeleteModal modalClose={modalClose} modalDelete={handleDelete} delid={props.taskid} deltaskname={props.taskname} deltaskdesk={props.taskdes} deltasktime={props.tasktime}  />}
     </React.Fragment>
   )
 }
