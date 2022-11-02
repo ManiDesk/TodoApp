@@ -1,10 +1,7 @@
-import { addDoc, collection, deleteDoc, doc, getDocs, query, where, updateDoc } from 'firebase/firestore';
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-
+import { collection, query, orderBy, onSnapshot, addDoc, where, Timestamp } from "firebase/firestore"
 import { useAuthState } from "react-firebase-hooks/auth";
 import { db, auth } from '../../FireBase'
 import React, { useState, useRef, useEffect } from "react";
-import { useDispatch } from 'react-redux';
 export const ADD_TASKS = 'ADD_TASKS';
 export const GET_TASKS = 'GET_TASKS';
 export const DELETE_ALL = 'DELETE_ALL';
@@ -13,30 +10,33 @@ export const UPDATE_TASKS = 'UPDATE_TASKS';
 
 
 export const gettasks = () => async (dispatch) => {
-
-    onAuthStateChanged(auth, async (user) => {
-        if (user) {
-
-            const q = query(collection(db, 'nirtodoapp' + user.uid), where("taskcompleted", "==", false));
-
-            const tasks = await getDocs(q);
-
-            if (tasks.docs.length > 0) {
-                const tasksArray = [];
-                for (var snap of tasks.docs) {
-                    const data = snap.data();
-                    tasksArray.push(data);
-                }
-                console.log(tasksArray)
-                dispatch({
-                    type: GET_TASKS,
-                    payload: tasksArray
-                })
-            }
-        } else {
-            // User is signed out
-            // ...
+    try {
+    const [user, loading, error] = useAuthState(auth);
+    const [cardlistsP, setcardlistP] = useState([]);
+    if (user) {
+        const taskColRef = query(collection(db, 'nirtodoapp' + user.uid), where("taskcompleted", "==", false))
+        if(taskColRef.docs.length > 0){
+            onSnapshot(taskColRef, (snapshot) => {
+                setcardlistP(snapshot.docs.map(doc => ({
+                    id: doc.id,
+                   data: doc.data()
+                 }))
+                 )
+       
+               })
+            dispatch({
+                type: GET_TASKS,
+                payload: cardlistsP
+            })
         }
-    });
+        
 
+
+}
+    }
+    catch (err) {
+        console.error(err);
+        alert("An error occured while fetching user data");
+      }
+  
 }
