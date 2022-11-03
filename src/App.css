@@ -349,3 +349,10 @@ body[data-app="nirapp"] .Toastify__toast-container {
 body[data-app="nirapp"] .p-datepicker {
   z-index: 999999999999999999999999999999 !important;
 }
+.nir-bottom button{
+border-radius:0 !important;
+}
+.nir-bottom {
+  position: fixed;
+  bottom: 0;
+}

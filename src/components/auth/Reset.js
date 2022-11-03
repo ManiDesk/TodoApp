@@ -90,7 +90,7 @@ export default React.memo(function Reset() {
                 </ul>
               </div>
             </div>
-            <div className="col-md-6  bg-white p-5 vh-100  align-items-center d-flex justify-content-center">
+            <div className="col-md-6  bg-white p-lg-5 p-md-4 p-md-3 p-2 vh-100  align-items-center d-flex justify-content-center">
               <div className="nir-sign-right w-100 px-4">
               <SuceessMessage successmsg= {successMsg.success_sts} successmsgname= {successMsg.successgname} failuremsg = {errMsg.errsts} failuremsgName = {errMsg.errmesgname}  />
                 <div className="nir-sign-title">
