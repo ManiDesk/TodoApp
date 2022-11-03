@@ -1,6 +1,6 @@
 import React from "react";
 import { Link,useLocation  } from "react-router-dom";
-function LeftSideBox(){
+function LeftSideBox({hidestskrecent}){
     const location = useLocation();
 
     //destructuring pathname from location
@@ -11,6 +11,12 @@ function LeftSideBox(){
 return(
     <React.Fragment>
        <div className="nir-side-box">
+       <div className="d-flex d-lg-none d-md-none d-sm-none nir-top-fix">
+<div className='d-flex w-100 '>            
+<button type="submit" className="btn btn-light"  onClick={hidestskrecent}><div><i className="fal fa-times"></i></div>  </button>
+ 
+</div>
+  </div>
                         <ul className="nir-left-box-list">
                             <li className={splitLocation[1] === "home" ? "active" : ""}>
                             <Link to="/home"> <i className="far fa-lightbulb-on"></i> Home</Link>

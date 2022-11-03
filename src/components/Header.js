@@ -4,6 +4,7 @@ import { query, collection, getDocs, where } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import logo from '../to-do-list.png';
+import userimage from '../user.png';
 
 function Header(){
 
@@ -33,50 +34,93 @@ function Header(){
     }, [user, loading]);
 return(
     <React.Fragment>
-      <nav className="navbar navbar-expand-md bg-white navbar-light justify-content-space-between nir-header">
+      <header>
+      <nav className=" navbar-expand-md navbar-light p-1  fixed-top  nav-bg-primary bg-white  nir-header">
+      <div className="container-fluid d-flex align-items-center px-3">
         <a className="navbar-brand" href="{/}"> <img src={logo} width="32" height="32" alt="logo" /> To do</a>
-        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar"><span className="navbar-toggler-icon"></span></button>
-        <div className="collapse navbar-collapse" id="collapsibleNavbar">
-            <ul className="navbar-nav mr-auto">
-                <li className="nav-item">
-                    <a className="nav-link" href="{someValidPath}"><i className="far fa-lightbulb-on"></i> My Day</a>
-                </li>
-                <li className="nav-item">
-                    <a className="nav-link" href="{someValidPath}"><i className="far fa-star"></i> Important</a>
-                </li>
-                <li className="nav-item">
-                    <a className="nav-link" href="{someValidPath}"><i className="far fa-window-alt"></i> Planned</a>
-                </li>
-                <li className="nav-item">
-                    <a className="nav-link" href="{someValidPath}"><i className="far fa-user"></i> Assigned to me</a>
-                </li>
-                <li className="nav-item">
-                    <a className="nav-link" href="{someValidPath}"><i className="far fa-home-alt"></i> Tasks</a>
-                </li>
-            </ul>
-           
-            <form className="form-inline my-2 my-lg-0 mr-3">
-                <div className="input-group">
-                    <input type="text" className="form-control" placeholder="Search" />
-                    <div className="input-group-append"><button className="btn btn-primary" type="submit">Go</button></div>
-                </div>
-            </form>
+                       
+        
+         <ul className='nir-ul-item ml-auto'>
+         <li className="nav-item navbar-dropdown dropdown-user dropdown">
+        <a className="nav-link dropdown-toggle  hide-arrow px-0" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <div className="d-flex align-items-center">
+                    <div className="flex-shrink-0 mr-0">
+                    <div className="avatar avatar-online">
+                <img src={userimage} alt="" className="w-px-40 h-auto rounded-circle" />
+              </div>
+                    </div>
+                    
+                  </div>
+        </a>
+        <div className="dropdown-menu p-0" aria-labelledby="navbarDropdownMenuLink">
+          
+          <li>
+                <a className="dropdown-item py-2" href="#">
+                  <div className="d-flex align-items-center">
+                    <div className="flex-shrink-0 mr-3">
+                      <div className="avatar avatar-online w-30px h-30px">
+                        <img src={userimage} alt="user" className="w-px-40 h-auto rounded-circle" />
+                      </div>
+                    </div>
+                    <div className="flex-grow-1 line-height-18">
+                      <span className="fw-bold-600 d-block">{name}</span>
+                      <small className="text-muted fs-13">Project Manager</small>
+                    </div>
+                  </div>
+                </a>
+              </li>
+              <li className="py-1">
+                <a className="dropdown-item  drop-item-inner pe-none" href="#">
+                  <div className="d-flex align-items-center">
+                    <div className="flex-shrink-0 mr-3">
+                      <span className="drop-min-width"><i className="far fa-envelope"></i></span>
+                    </div>
+                    <div className="flex-grow-1">
+                      <span className="align-middle">{user?.email}</span>
+                    </div>
+                  </div>
+
+
+                </a>
+                <a className="dropdown-item  drop-item-inner pe-none" href="#">
+                  <div className="d-flex align-items-center">
+                    <div className="flex-shrink-0 mr-3">
+                      <span className="drop-min-width"><i className="far fa-mobile"></i></span>
+                    </div>
+                    <div className="flex-grow-1">
+                      <span className="align-middle">{phone}</span>
+                    </div>
+                  </div>
+
+
+                </a>
+              </li>
+
+              <li >
+                <a className="dropdown-item border-top py-2" href="#"  onClick={logout}>
+                  <div className="d-flex align-items-center">
+                    <div className="flex-shrink-0 mr-3">
+                      <span className="drop-min-width"><i className="far fa-sign-out-alt"></i></span>
+                    </div>
+                    <div className="flex-grow-1">
+                      <span className="align-middle">Log Out</span>
+                    </div>
+                  </div>
+
+
+                </a>
+              </li>
+
+ 
          
-            <div className="btn-group dropdown nir-dropdown">
-    <button type="button" className="btn btn-primary">{name}</button>
-    <button type="button" className="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
-    </button>
-    <div className="dropdown-menu">
-      <div className="dropdown-item" >{user?.email}</div>
-      <div className="dropdown-item" >{phone}</div>
-      <div className="dropdown-divider"></div>
-      <div className="dropdown-item"  onClick={logout}>Log out</div>
-    </div>
-  </div>
-         
+        </div>
+      </li>   
+         </ul>
+       
         </div>
         
     </nav>
+    </header>
     </React.Fragment>
 )
 }

@@ -95,7 +95,7 @@ body[data-app="nirapp"] .card.nir-main-add-task-item-add {
   cursor: pointer;
 }
 
-body[data-app="nirapp"] .nir-empty i {
+body[data-app="nirapp"] .nir-empty .xl-large-icon {
   font-size: 30px;
 }
 
@@ -334,10 +334,6 @@ body[data-app="nirapp"] .nav-tabs .nav-link.active {
   font-weight: 600;
 }
 
-body[data-app="nirapp"] .dropdown-menu {
-  margin-left: calc(100% - 14rem);
-}
-
 body[data-app="nirapp"] .btn-light {
   border: 1px solid #ced4da;
 }
@@ -355,4 +351,82 @@ border-radius:0 !important;
 .nir-bottom {
   position: fixed;
   bottom: 0;
+  z-index: 999999;
+}
+.nir-task-panel {
+  background: #0000004f !important;
+  position: fixed !important;
+  z-index: 99999;
+  top: 0;
+  right: 0;
+  left: 0;
+}
+.nir-task-panel .nir-side-box {
+  position: relative;
+  bottom: 0;
+  height: 100%;
+  width: 300px;
+  z-index: 9999;
+  background: #fff;
+}
+.nir-top-fix {
+  position: absolute;
+  z-index: 999999;
+  right: -35px;
+  bottom: 0;
+  top: 0;
+  display: flex !important;
+  align-items: self-start;
+  justify-content: flex-end;
+}
+.nir-top-fix button{
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.nir-main-content {
+  height: 100vh;
+}
+span.drop-min-width {
+  min-width: 2.375rem;
+  display: block;
+  text-align: center;
+}
+.avatar {
+  position: relative;
+  width: 2.375rem;
+  height: 2.375rem;
+  cursor: pointer;
+}
+.avatar img {
+  width: 100%;
+  height: 100%;
+}
+.hide-arrow.dropdown-toggle::after{
+  display: none;
+}
+.nir-ul-item{
+  list-style: none;
+  margin: 0;
+  padding: auto;
+}
+.avatar.avatar-online:after {
+  background-color: #71dd37;
+}
+.avatar.avatar-online:after, .avatar.avatar-offline:after, .avatar.avatar-away:after, .avatar.avatar-busy:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 3px;
+  width: 8px;
+  height: 8px;
+  border-radius: 100%;
+  box-shadow: 0 0 0 2px #fff;
+}
+.fw-bold {
+ 
+  font-weight: 600;
+}
+
+.bodyPadmain{
+  padding-top: 60px;
 }
