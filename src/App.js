@@ -10,6 +10,7 @@ import ImportantTask from './components/ImportantTask';
 import PlannedTask from './components/PlannedTask';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
+import ResumeHome from './resumebuilder/components/ResumeHome';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route exact path="/home" element={<Home />} />
           <Route exact path="/important" element={<ImportantTask />} />
           <Route exact path="/planned" element={<PlannedTask />} />
+          <Route exact path="/resumeHome" element={<ResumeHome />} />
 
 
         </Routes>

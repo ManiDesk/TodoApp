@@ -6,6 +6,7 @@
   --nir-primary: #4f36ec;
   --nir-primary-hover: #4a35d1;
   --nir-danger: red;
+  --nir-card-border-color :#c8cbcf;
 }
 
 body[data-app="nirapp"] {
@@ -429,4 +430,13 @@ span.drop-min-width {
 
 .bodyPadmain{
   padding-top: 60px;
+}
+
+.card-heaer {
+  padding: 10px;
+  border-bottom: 1px solid var(--nir-card-border-color);
+}
+.p-tabview .p-tabview-nav {
+ 
+  overflow: hidden;
 }

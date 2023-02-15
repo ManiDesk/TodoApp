@@ -33,6 +33,9 @@ return(
                             <li className="">
                                 <a href="Tasks"><i className="far fa-home-alt"></i> Tasks</a>
                             </li>
+                            <li className="">
+                            <Link to="/resumeHome"> <i className="far fa-eye"></i> Resume</Link>
+                            </li>
                         </ul>
                     </div>
     </React.Fragment>
