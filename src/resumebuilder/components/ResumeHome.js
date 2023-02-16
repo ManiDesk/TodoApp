@@ -1,15 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Header from "../../components/Header";
 import { InputText } from 'primereact/inputtext';
 import { InputTextarea } from 'primereact/inputtextarea';
 import { Calendar } from 'primereact/calendar';
 import { Editor } from 'primereact/editor';
-import { collection, addDoc, Timestamp } from "firebase/firestore"
+import { collection, query, orderBy, onSnapshot, addDoc, where, Timestamp } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth, db } from '../../components/FireBase'
+import { auth, db } from '../../components/FireBase';
 // import SuceessMessage from "./auth/SuccessMessage";
-
+import { Dialog } from 'primereact/dialog';
 import { toast } from 'react-toastify';
+import jsPDF from 'jspdf';
 //theme
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 
@@ -23,11 +24,69 @@ import { useForm, Controller } from 'react-hook-form';
 import { classNames } from 'primereact/utils';
 import { Button } from 'primereact/button';
 function ResumeHome() {
+    const [user, loader, error] = useAuthState(auth);
     const [showMessage, setShowMessage] = useState(false);
     const [formData, setFormData] = useState({});
     const [loading, setLoading] = useState(false);
     const [text1, setText1] = useState('');
-    const [user, error] = useAuthState(auth);
+
+    const [fetchlists, setFetchlist] = useState([]);
+    const reportTemplateRef = useRef(null);
+    
+    const handleGeneratePdf = () => {
+        const doc = new jsPDF({
+            // orientation: 'portrait',
+            format: "a4",
+            unit: "pt",
+          
+        });
+
+        // Adding the fonts.
+        doc.setFont('Inter-Regular', 'normal');
+        doc.setFontSize({size: '11px'});
+
+        doc.html(reportTemplateRef.current, {
+            
+            async callback(doc) {
+                await doc.save('document' + user);
+            },
+        });
+    };
+    useEffect(() => {
+        console.log(user)
+        fetchDetails();
+        console.log(fetchDetails())
+    }, [user, loader])
+    const fetchDetails = () => {
+
+        try {
+
+            if (user) {
+
+                const resumeColRef = query(collection(db, 'nirresumebuilder' + user.uid), orderBy("basicdetails", "asc"))
+                onSnapshot(resumeColRef, (snapshot) => {
+
+                    setFetchlist(snapshot.docs.length);
+                    console.log(snapshot.docs.length)
+
+                    setFetchlist(snapshot.docs.map(doc => ({
+                        id: doc.id,
+                        data: doc.data().basicdetails
+                    }))
+                    )
+
+                })
+            }
+            else {
+                console.log('user is not signed in to retrive username')
+            }
+
+        } catch (err) {
+            console.error(err);
+            alert("An error occured while fetching user data");
+        }
+
+    }
     const onLoadingClick = () => {
         setLoading(true);
 
@@ -35,7 +94,32 @@ function ResumeHome() {
             setLoading(false);
         }, 2000);
     }
+    const [displayMaximizable, setDisplayMaximizable] = useState(false);
 
+    const dialogFuncMap = {
+        'displayMaximizable': setDisplayMaximizable
+    }
+
+    const onClick = (name) => {
+        dialogFuncMap[`${name}`](true);
+    }
+
+    const onHide = (name) => {
+        dialogFuncMap[`${name}`](false);
+    }
+    const renderFooter = (name) => {
+        return (
+            <div className="d-flex align-items-center justify-content-center border-top pt-3">
+                <Button label="OK" icon="pi pi-check" onClick={() => onHide(name)} autoFocus className="p-button-primary p-button-sm" />
+                <Button label="Close" icon="pi pi-times" onClick={() => onHide(name)} className="p-button-outlined p-button-secondary p-button-sm" />
+
+            </div>
+        );
+    }
+    const myIcon = (
+        <Button icon="pi pi-file-pdf" onClick={handleGeneratePdf} className="p-button-rounded p-button-text p-button-success" aria-label="Filter" />
+        
+    )
     const defaultValues = {
         name: '',
         email: '',
@@ -68,14 +152,14 @@ function ResumeHome() {
         setFormData(data);
         console.log(data)
         setShowMessage(true);
-       
+
         try {
 
 
             if (user) {
                 addDoc(collection(db, "nirresumebuilder" + user.uid), {
-                     userid: user.uid,
-                     basicdetails : data,                   
+                    userid: user.uid,
+                    basicdetails: data,
                 }).then(
                     toast.success('red' + ' - ' + "Successfully Added"),
                     reset()
@@ -99,13 +183,26 @@ function ResumeHome() {
     return (
         <React.Fragment>
             <Header />
-            <section className="bodyPadmain">
+            <section className="bodyPadmain" >
                 <div className="container-fluid mt-3">
                     <div className="row">
                         <div className="col-md-12">
                             <div className="card">
                                 <div className="card-heaer">
-                                    <h6 className="m-0">Add Resume</h6>
+                                    <div className="d-flex align-items-center">
+                                        <h6 className="m-0 flex-fill">Add Resume</h6>
+                                        <div className="ms-auto">
+                                            <div className="button-demo">
+                                                <div className="template">
+
+                                                    <Button onClick={() => onClick('displayMaximizable')} className="vimeo p-0" aria-label="Preview">
+                                                        <i className="pi pi-eye px-2"></i>
+                                                        <span className="px-3 text-uppercase">Preview</span>
+                                                    </Button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div className="card-body p-0">
                                     <TabView>
@@ -153,7 +250,7 @@ function ResumeHome() {
                                                                     <i className="pi pi-envelope" />
 
                                                                     <Controller name="altemail" control={control}
-                                                                        rules={{required: false, pattern: { value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i, message: 'Invalid email address. E.g. example@email.com' } }}
+                                                                        rules={{ required: false, pattern: { value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i, message: 'Invalid email address. E.g. example@email.com' } }}
                                                                         render={({ field, fieldState }) => (
                                                                             <InputText id={field.name} {...field} className={`p-inputtext-sm ${classNames({ 'p-invalid': fieldState.invalid })}`} />
                                                                         )} />
@@ -180,7 +277,7 @@ function ResumeHome() {
                                                             <div className="field mb-3">
                                                                 <span className="p-form">
                                                                     <label htmlFor="altmobile" className={classNames({ 'p-error': errors.altmobile })}>Alternative Mobile number*</label>
-                                                                    <Controller name="altmobile" control={control} rules={{required: false }} render={({ field, fieldState }) => (
+                                                                    <Controller name="altmobile" control={control} rules={{ required: false }} render={({ field, fieldState }) => (
                                                                         <InputText keyfilter="num" id={field.name} {...field} className={`p-inputtext-sm ${classNames({ 'p-invalid': fieldState.invalid })}`} />
                                                                     )} />
 
@@ -304,7 +401,7 @@ function ResumeHome() {
                                                                 <span className="p-form">
                                                                     <label htmlFor="websiteurl" className={classNames({ 'p-error': errors.websiteurl })}>Website Url*</label>
                                                                     <Controller name="websiteurl" control={control} rules={{ required: false }} render={({ field, fieldState }) => (
-                                                                        <InputText  id={field.name} {...field} className={`p-inputtext-sm ${classNames({ 'p-invalid': fieldState.invalid })}`} />
+                                                                        <InputText id={field.name} {...field} className={`p-inputtext-sm ${classNames({ 'p-invalid': fieldState.invalid })}`} />
                                                                     )} />
 
                                                                 </span>
@@ -355,7 +452,7 @@ function ResumeHome() {
                                                             <div className="field mb-3">
                                                                 <span className="p-form">
                                                                     <label htmlFor="instagramUrl" className={classNames({ 'p-error': errors.instagramUrl })}>Instagram Url*</label>
-                                                                    <Controller name="instagramUrl" control={control} rules={{ required: false}} render={({ field, fieldState }) => (
+                                                                    <Controller name="instagramUrl" control={control} rules={{ required: false }} render={({ field, fieldState }) => (
                                                                         <InputText id={field.name} {...field} className={`p-inputtext-sm ${classNames({ 'p-invalid': fieldState.invalid })}`} />
                                                                     )} />
 
@@ -468,6 +565,15 @@ function ResumeHome() {
                     </div>
                 </div>
             </section>
+            <Dialog header="Header" visible={displayMaximizable} icons={myIcon} maximizable modal style={{ width: '50vw' }} footer={renderFooter('displayMaximizable')} onHide={() => onHide('displayMaximizable')}>
+                
+                <div ref={reportTemplateRef}>
+                    {
+                        fetchlists.map(fetchlist => <p key={fetchlist.data.name}>{fetchlist.data.name}</p>)
+
+                    }
+                </div>
+            </Dialog>
         </React.Fragment>
     )
 }
