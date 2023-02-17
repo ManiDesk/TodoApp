@@ -187,7 +187,7 @@ function ResumeHome() {
                 <div className="container-fluid mt-3">
                     <div className="row">
                         <div className="col-md-12">
-                            <div className="card">
+                            <div className="card mb-4">
                                 <div className="card-heaer">
                                     <div className="d-flex align-items-center">
                                         <h6 className="m-0 flex-fill">Add Resume</h6>
@@ -209,9 +209,10 @@ function ResumeHome() {
                                         <TabPanel header="Basic Details" leftIcon="pi pi-calendar mr-2">
                                             <div className="p-2">
                                                 <form onSubmit={handleSubmit(onSubmit)} className="p-fluid">
+                                                    <h5>Basic</h5>
                                                     <div className="row">
                                                         {/* name  */}
-                                                        <div className="col-md-4">
+                                                        <div className="col-md-3">
                                                             <div className="field mb-3">
                                                                 <span className="p-form">
                                                                     <label htmlFor="name" className={classNames({ 'p-error': errors.name })}>Name*</label>
@@ -224,7 +225,7 @@ function ResumeHome() {
                                                             </div>
                                                         </div>
                                                         {/* Email  */}
-                                                        <div className="col-md-4">
+                                                        <div className="col-md-3">
                                                             <div className="field mb-3">
                                                                 <label htmlFor="email" className={classNames({ 'p-error': !!errors.email })}>Email*</label>
                                                                 <span className="p-form p-input-icon-right">
@@ -242,7 +243,7 @@ function ResumeHome() {
                                                             </div>
                                                         </div>
                                                         {/* Alt Email  */}
-                                                        <div className="col-md-4">
+                                                        <div className="col-md-3">
                                                             <div className="field mb-3">
                                                                 <label htmlFor="altemail" className={classNames({ 'p-error': !!errors.altemail })}>Alternative Email*</label>
                                                                 <span className="p-form p-input-icon-right">
@@ -260,7 +261,7 @@ function ResumeHome() {
                                                             </div>
                                                         </div>
                                                         {/* mobile  */}
-                                                        <div className="col-md-4">
+                                                        <div className="col-md-3">
                                                             <div className="field mb-3">
                                                                 <span className="p-form">
                                                                     <label htmlFor="mobile" className={classNames({ 'p-error': errors.mobile })}>Mobile Number*</label>
@@ -273,7 +274,7 @@ function ResumeHome() {
                                                             </div>
                                                         </div>
                                                         {/* alt Mobile */}
-                                                        <div className="col-md-4">
+                                                        <div className="col-md-3">
                                                             <div className="field mb-3">
                                                                 <span className="p-form">
                                                                     <label htmlFor="altmobile" className={classNames({ 'p-error': errors.altmobile })}>Alternative Mobile number*</label>
@@ -285,58 +286,27 @@ function ResumeHome() {
                                                                 {getFormErrorMessage('altmobile')}
                                                             </div>
                                                         </div>
-                                                        {/* title  */}
-                                                        <div className="col-md-4">
+                                                       
+                                                        </div>
+
+
+                                                        <h5>Address</h5>
+
+                                                        <div className="row">
+                                                        <div className="col-md-3">
                                                             <div className="field mb-3">
                                                                 <span className="p-form">
-                                                                    <label htmlFor="title" className={classNames({ 'p-error': errors.title })}>Title*</label>
-                                                                    <Controller name="title" control={control} rules={{ required: 'Title is required.' }} render={({ field, fieldState }) => (
-                                                                        <InputText id={field.name} {...field} className={`p-inputtext-sm ${classNames({ 'p-invalid': fieldState.invalid })}`} />
+                                                                    <label htmlFor="address" className={classNames({ 'p-error': errors.address })}>Address*</label>
+                                                                    <Controller name="address" control={control} rules={{ required: 'Address is required.' }} render={({ field, fieldState }) => (
+
+                                                                        <InputText  id={field.name} {...field} className={`p-inputtext-sm ${classNames({ 'p-invalid': fieldState.invalid })}`} />
                                                                     )} />
 
                                                                 </span>
-                                                                {getFormErrorMessage('title')}
+                                                                {getFormErrorMessage('address')}
                                                             </div>
                                                         </div>
-                                                        {/* location  */}
-                                                        <div className="col-md-4">
-                                                            <div className="field mb-3">
-                                                                <span className="p-form">
-                                                                    <label htmlFor="location" className={classNames({ 'p-error': errors.location })}>Location *</label>
-                                                                    <Controller name="location" control={control} rules={{ required: 'Location is required.' }} render={({ field, fieldState }) => (
-                                                                        <InputText id={field.name} {...field} className={`p-inputtext-sm ${classNames({ 'p-invalid': fieldState.invalid })}`} />
-                                                                    )} />
-
-                                                                </span>
-                                                                {getFormErrorMessage('location')}
-                                                            </div>
-                                                        </div>
-                                                        {/* totalExperience  */}
-                                                        <div className="col-md-4">
-                                                            <div className="field mb-3">
-                                                                <span className="p-form">
-                                                                    <label htmlFor="totalExperience" className={classNames({ 'p-error': errors.totalExperience })}>Total Year Experience*</label>
-                                                                    <Controller name="totalExperience" control={control} rules={{ required: 'Total Experience is required.' }} render={({ field, fieldState }) => (
-                                                                        <InputText keyfilter="num" id={field.name} {...field} className={`p-inputtext-sm ${classNames({ 'p-invalid': fieldState.invalid })}`} />
-                                                                    )} />
-
-                                                                </span>
-                                                                {getFormErrorMessage('totalExperience')}
-                                                            </div>
-                                                        </div>
-                                                        <div className="col-md-4">
-                                                            <div className="field mb-3">
-                                                                <span className="p-form">
-                                                                    <label htmlFor="releventExperience" className={classNames({ 'p-error': errors.releventExperience })}>Relevent Experience*</label>
-                                                                    <Controller name="releventExperience" control={control} rules={{ required: 'Relevent Experience is required.' }} render={({ field, fieldState }) => (
-                                                                        <InputText keyfilter="num" id={field.name} {...field} className={`p-inputtext-sm ${classNames({ 'p-invalid': fieldState.invalid })}`} />
-                                                                    )} />
-
-                                                                </span>
-                                                                {getFormErrorMessage('releventExperience')}
-                                                            </div>
-                                                        </div>
-                                                        <div className="col-md-4">
+                                                        <div className="col-md-3">
                                                             <div className="field mb-3">
                                                                 <span className="p-form">
                                                                     <label htmlFor="nationality" className={classNames({ 'p-error': errors.nationality })}>Nationality*</label>
@@ -348,7 +318,7 @@ function ResumeHome() {
                                                                 {getFormErrorMessage('nationality')}
                                                             </div>
                                                         </div>
-                                                        <div className="col-md-4">
+                                                        <div className="col-md-3">
                                                             <div className="field mb-3">
                                                                 <span className="p-form">
                                                                     <label htmlFor="country" className={classNames({ 'p-error': errors.country })}>Country*</label>
@@ -360,7 +330,7 @@ function ResumeHome() {
                                                                 {getFormErrorMessage('country')}
                                                             </div>
                                                         </div>
-                                                        <div className="col-md-4">
+                                                        <div className="col-md-3">
                                                             <div className="field mb-3">
                                                                 <span className="p-form">
                                                                     <label htmlFor="state" className={classNames({ 'p-error': errors.state })}>State*</label>
@@ -372,7 +342,7 @@ function ResumeHome() {
                                                                 {getFormErrorMessage('state')}
                                                             </div>
                                                         </div>
-                                                        <div className="col-md-4">
+                                                        <div className="col-md-3">
                                                             <div className="field mb-3">
                                                                 <span className="p-form">
                                                                     <label htmlFor="pincode" className={classNames({ 'p-error': errors.pincode })}>Pincode*</label>
@@ -384,7 +354,51 @@ function ResumeHome() {
                                                                 {getFormErrorMessage('pincode')}
                                                             </div>
                                                         </div>
-                                                        <div className="col-md-4">
+                                                      
+                                                        </div>
+
+                                                        <h5>Roles and Experience</h5>               
+                                                        <div className="row">
+                                                        {/* title  */}
+                                                        <div className="col-md-3">
+                                                            <div className="field mb-3">
+                                                                <span className="p-form">
+                                                                    <label htmlFor="title" className={classNames({ 'p-error': errors.title })}>Title*</label>
+                                                                    <Controller name="title" control={control} rules={{ required: 'Title is required.' }} render={({ field, fieldState }) => (
+                                                                        <InputText id={field.name} {...field} className={`p-inputtext-sm ${classNames({ 'p-invalid': fieldState.invalid })}`} />
+                                                                    )} />
+
+                                                                </span>
+                                                                {getFormErrorMessage('title')}
+                                                            </div>
+                                                        </div>                                                       
+                                                        {/* totalExperience  */}
+                                                        <div className="col-md-3">
+                                                            <div className="field mb-3">
+                                                                <span className="p-form">
+                                                                    <label htmlFor="totalExperience" className={classNames({ 'p-error': errors.totalExperience })}>Total Year Experience*</label>
+                                                                    <Controller name="totalExperience" control={control} rules={{ required: 'Total Experience is required.' }} render={({ field, fieldState }) => (
+                                                                        <InputText keyfilter="num" id={field.name} {...field} className={`p-inputtext-sm ${classNames({ 'p-invalid': fieldState.invalid })}`} />
+                                                                    )} />
+
+                                                                </span>
+                                                                {getFormErrorMessage('totalExperience')}
+                                                            </div>
+                                                        </div>
+                                                        <div className="col-md-3">
+                                                            <div className="field mb-3">
+                                                                <span className="p-form">
+                                                                    <label htmlFor="releventExperience" className={classNames({ 'p-error': errors.releventExperience })}>Relevent Experience*</label>
+                                                                    <Controller name="releventExperience" control={control} rules={{ required: 'Relevent Experience is required.' }} render={({ field, fieldState }) => (
+                                                                        <InputText keyfilter="num" id={field.name} {...field} className={`p-inputtext-sm ${classNames({ 'p-invalid': fieldState.invalid })}`} />
+                                                                    )} />
+
+                                                                </span>
+                                                                {getFormErrorMessage('releventExperience')}
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div className="col-md-3">
                                                             <div className="field mb-3">
                                                                 <span className="p-form">
                                                                     <label htmlFor="dateofbirth" className={classNames({ 'p-error': errors.dateofbirth })}>Date of birth</label>
@@ -395,8 +409,11 @@ function ResumeHome() {
                                                                 {getFormErrorMessage('dateofbirth')}
                                                             </div>
                                                         </div>
+                                                        </div>
+                                                          <h5>Social URL</h5>
+                                                    <div className="row">
                                                         {/* website ulr  */}
-                                                        <div className="col-md-4">
+                                                        <div className="col-md-3">
                                                             <div className="field mb-3">
                                                                 <span className="p-form">
                                                                     <label htmlFor="websiteurl" className={classNames({ 'p-error': errors.websiteurl })}>Website Url*</label>
@@ -409,7 +426,7 @@ function ResumeHome() {
                                                             </div>
                                                         </div>
                                                         {/* facebook ulr  */}
-                                                        <div className="col-md-4">
+                                                        <div className="col-md-3">
                                                             <div className="field mb-3">
                                                                 <span className="p-form">
                                                                     <label htmlFor="facebookUrl" className={classNames({ 'p-error': errors.facebookUrl })}>Facebook Url*</label>
@@ -422,7 +439,7 @@ function ResumeHome() {
                                                             </div>
                                                         </div>
                                                         {/* website ulr  */}
-                                                        <div className="col-md-4">
+                                                        <div className="col-md-3">
                                                             <div className="field mb-3">
                                                                 <span className="p-form">
                                                                     <label htmlFor="linkedinUrl" className={classNames({ 'p-error': errors.linkedinUrl })}>linkedin Url*</label>
@@ -435,7 +452,7 @@ function ResumeHome() {
                                                             </div>
                                                         </div>
                                                         {/* twitterUrl ulr  */}
-                                                        <div className="col-md-4">
+                                                        <div className="col-md-3">
                                                             <div className="field mb-3">
                                                                 <span className="p-form">
                                                                     <label htmlFor="twitterUrl" className={classNames({ 'p-error': errors.twitterUrl })}>Twitter Url*</label>
@@ -448,7 +465,7 @@ function ResumeHome() {
                                                             </div>
                                                         </div>
                                                         {/* instagramUrl ulr  */}
-                                                        <div className="col-md-4">
+                                                        <div className="col-md-3">
                                                             <div className="field mb-3">
                                                                 <span className="p-form">
                                                                     <label htmlFor="instagramUrl" className={classNames({ 'p-error': errors.instagramUrl })}>Instagram Url*</label>
@@ -461,7 +478,7 @@ function ResumeHome() {
                                                             </div>
                                                         </div>
                                                         {/* githubUrl ulr  */}
-                                                        <div className="col-md-4">
+                                                        <div className="col-md-3">
                                                             <div className="field mb-3">
                                                                 <span className="p-form">
                                                                     <label htmlFor="githubUrl" className={classNames({ 'p-error': errors.instagramUrl })}>Github Url*</label>
@@ -474,7 +491,7 @@ function ResumeHome() {
                                                             </div>
                                                         </div>
                                                         {/* otherurl ulr  */}
-                                                        <div className="col-md-4">
+                                                        <div className="col-md-3">
                                                             <div className="field mb-3">
                                                                 <span className="p-form">
                                                                     <label htmlFor="otherUrl" className={classNames({ 'p-error': errors.otherUrl })}>Other Url*</label>
@@ -485,20 +502,9 @@ function ResumeHome() {
                                                                 </span>
                                                                 {getFormErrorMessage('otherUrl')}
                                                             </div>
-                                                        </div>
-                                                        <div className="col-md-6">
-                                                            <div className="field mb-3">
-                                                                <span className="p-form">
-                                                                    <label htmlFor="address" className={classNames({ 'p-error': errors.address })}>Address*</label>
-                                                                    <Controller name="address" control={control} rules={{ required: 'Address is required.' }} render={({ field, fieldState }) => (
-
-                                                                        <InputTextarea rows={5} cols={30} id={field.name} {...field} className={`p-inputtext-sm ${classNames({ 'p-invalid': fieldState.invalid })}`} />
-                                                                    )} />
-
-                                                                </span>
-                                                                {getFormErrorMessage('address')}
-                                                            </div>
-                                                        </div>
+                                                        </div></div>
+                                                        <h5>Other Details</h5>               
+                                                        <div className="row">
 
                                                         <div className="col-md-6">
                                                             <div className="field mb-3">
@@ -513,7 +519,7 @@ function ResumeHome() {
                                                                 {getFormErrorMessage('aboutme')}
                                                             </div>
                                                         </div>
-                                                        <div className="col-md-12">
+                                                        <div className="col-md-6">
                                                             <div className="field mb-3">
                                                                 <span className="p-form">
                                                                     <label htmlFor="carreerobj" className={classNames({ 'p-error': errors.carreerobj })}>Carreer Objective*</label>
@@ -559,7 +565,7 @@ function ResumeHome() {
                                     </TabView>
 
                                 </div>
-                                <div className="card-footer"></div>
+                                {/* <div className="card-footer"></div> */}
                             </div>
                         </div>
                     </div>
