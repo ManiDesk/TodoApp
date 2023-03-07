@@ -8,14 +8,15 @@ import reportWebVitals from './reportWebVitals';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
+import store from './components/redux/store';
+import { Provider } from "react-redux";
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-
   <React.StrictMode>
-    {/* <Provider store={store}> */}
+    <Provider store={store}>
       <App />
       <ToastContainer />
-    {/* </Provider> */}
+    </Provider>
   </React.StrictMode>
 
 );

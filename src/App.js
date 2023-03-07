@@ -11,8 +11,11 @@ import PlannedTask from './components/PlannedTask';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import ResumeHome from './resumebuilder/components/ResumeHome';
+import TestResume from './resumebuilder/components/testresume';
+import ResumeHome2 from './resumebuilder/components/TestResume2';
 
-function App() {
+function App(store) {
+  // console.log(store);
   return (
     <React.Fragment>
       <Router>
@@ -23,7 +26,8 @@ function App() {
           <Route exact path="/home" element={<Home />} />
           <Route exact path="/important" element={<ImportantTask />} />
           <Route exact path="/planned" element={<PlannedTask />} />
-          <Route exact path="/resumeHome" element={<ResumeHome />} />
+          {/* <Route exact path="/resumeHome" element={<ResumeHome />} /> */}
+          <Route exact path="/resumeHome" element={<ResumeHome2 />} />
 
 
         </Routes>

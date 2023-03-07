@@ -21,7 +21,7 @@ function CenterMainContent() {
   // firebase
   useEffect(() => {
     // dispatch(gettasks())
-    console.log(user)
+    console.log(auth)
     fetchtodoListpending()
     fetchtodoListCompleted()
   }, [user, loading])

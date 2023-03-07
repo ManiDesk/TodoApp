@@ -21,7 +21,7 @@ function Header(){
         setphone(data.phone);
         setName(data.name);
       } catch (err) {
-        console.error(err);
+        //console.error(err);
         alert("An error occured while fetching user data");
       }
     };

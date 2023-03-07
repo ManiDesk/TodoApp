@@ -19,6 +19,7 @@ import {
     incrementAsync,
     selectCount,
 } from '../../components/redux/reducer';
+import {AddBasicDetails,EditBasicDetails,UpdateBasicDetails,DeleteBasicDetails,FetchBasicDetails,userlist} from '../../components/redux/createSlice/basicDetailSlice'
 //theme
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 
@@ -31,7 +32,7 @@ import { TabView, TabPanel } from 'primereact/tabview';
 import { useForm, Controller } from 'react-hook-form';
 import { classNames } from 'primereact/utils';
 import { Button } from 'primereact/button';
-function ResumeHome() {
+function TestResume() {
     const [user, loader, error] = useAuthState(auth);
     const [showMessage, setShowMessage] = useState(false);
     const [formData, setFormData] = useState({});
@@ -61,47 +62,9 @@ function ResumeHome() {
         });
     };
     useEffect(() => {
-        console.log(user)
-        fetchDetails();
-        console.log(fetchDetails())
+      
     }, [user, loader])
-    const fetchDetails = () => {
-
-        try {
-
-            if (user) {
-
-                const resumeColRef = query(collection(db, 'nirresumebuilder' + user.uid), orderBy("basicdetails", "asc"))
-                onSnapshot(resumeColRef, (snapshot) => {
-
-                    setFetchlist(snapshot.docs.length);
-                    console.log(snapshot.docs.length)
-
-                    setFetchlist(snapshot.docs.map(doc => ({
-                        id: doc.id,
-                        data: doc.data().basicdetails
-                    }))
-                    )
-
-                })
-            }
-            else {
-                console.log('user is not signed in to retrive username')
-            }
-
-        } catch (err) {
-            console.error(err);
-            alert("An error occured while fetching user data");
-        }
-
-    }
-    const onLoadingClick = () => {
-        setLoading(true);
-
-        setTimeout(() => {
-            setLoading(false);
-        }, 2000);
-    }
+   
     const [displayMaximizable, setDisplayMaximizable] = useState(false);
 
     const dialogFuncMap = {
@@ -157,8 +120,10 @@ function ResumeHome() {
     const { control, formState: { errors }, handleSubmit, reset } = useForm({ defaultValues });
 
     const onSubmit = (data) => {
+       dispatch(AddBasicDetails(data));
+    //    console.log(data)
         setFormData(data);
-        console.log(data)
+        // console.log(data)
         setShowMessage(true);
 
         try {
@@ -188,6 +153,10 @@ function ResumeHome() {
         return errors[name] && <small className="p-error">{errors[name].message}</small>
     };
     const count = useSelector(selectCount);
+    const userlistitems = useSelector(userlist);
+    console.log(userlistitems)
+    
+    //const[bscdetail,setBasicdetail] = useState(useSelector(FetchBasicDetails)) ;
     const dispatch = useDispatch();
     const [incrementAmount, setIncrementAmount] = useState('2');
 
@@ -543,7 +512,7 @@ function ResumeHome() {
 
                                                     </div>
                                                     <div className="">
-                                                        <Button type="submit" label="Submit" />
+                                                        <Button type="submit" label="Submit"   />
 
                                                         {/* <Button type="submit" label="Submit" className="mt-2" /> */}
                                                     </div>
@@ -585,6 +554,36 @@ function ResumeHome() {
 
                     }
                 </div> */}
+              
+                <div >
+                    
+    <p>{userlistitems.name }</p>
+    <p>{userlistitems.email }</p>
+    <p>{userlistitems.altemail }</p>
+    <p>{userlistitems.mobile }</p>
+    <p>{userlistitems.altmobile }</p>
+    <p>{userlistitems.title }</p>
+    <p>{userlistitems.location }</p>
+    <p>{userlistitems.totalExperience }</p>
+    <p>{userlistitems.releventExperience }</p>
+    <p>{userlistitems.nationality }</p>
+    <p>{userlistitems.dateofbirth }</p>
+    <p>{userlistitems.address }</p>
+    <p>{userlistitems.aboutme }</p>
+    <p>{userlistitems.carreerobj }</p>
+    <p>{userlistitems.websiteurl }</p>
+    <p>{userlistitems.linkedinUrl }</p>
+    <p>{userlistitems.facebookUrl }</p>
+    <p>{userlistitems.instagramUrl }</p>
+    <p>{userlistitems.twitterUrl }</p>
+    <p>{userlistitems.githubUrl }</p>
+    <p>{userlistitems.otherUrl }</p>
+    <p>{userlistitems.country }</p>
+    <p>{userlistitems.state }</p>
+    <p>{userlistitems.pincode }</p>
+
+                </div>
+             
                 <div className="text-center">
                     <div className='row justify-content-center gap-3 mb-3'>
                         <button
@@ -630,4 +629,4 @@ function ResumeHome() {
         </React.Fragment>
     )
 }
-export default ResumeHome;
+export default TestResume;

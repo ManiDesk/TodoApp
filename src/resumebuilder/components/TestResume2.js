@@ -19,6 +19,8 @@ import {
     incrementAsync,
     selectCount,
 } from '../../components/redux/reducer';
+import {AddBasicDetails,EditBasicDetails,UpdateBasicDetails,DeleteBasicDetails,FetchBasicDetails,userlist} from '../../components/redux/createSlice/basicDetailSlice'
+
 //theme
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 
@@ -31,7 +33,7 @@ import { TabView, TabPanel } from 'primereact/tabview';
 import { useForm, Controller } from 'react-hook-form';
 import { classNames } from 'primereact/utils';
 import { Button } from 'primereact/button';
-function ResumeHome() {
+function ResumeHome2() {
     const [user, loader, error] = useAuthState(auth);
     const [showMessage, setShowMessage] = useState(false);
     const [formData, setFormData] = useState({});
@@ -61,39 +63,17 @@ function ResumeHome() {
         });
     };
     useEffect(() => {
-        console.log(user)
+        const mani = auth;
+        //console.log(mani.currentUser)
+        // console.log(mani.uid)
+        // console.log(user)
         fetchDetails();
         console.log(fetchDetails())
     }, [user, loader])
-    const fetchDetails = () => {
-
-        try {
-
-            if (user) {
-
-                const resumeColRef = query(collection(db, 'nirresumebuilder' + user.uid), orderBy("basicdetails", "asc"))
-                onSnapshot(resumeColRef, (snapshot) => {
-
-                    setFetchlist(snapshot.docs.length);
-                    console.log(snapshot.docs.length)
-
-                    setFetchlist(snapshot.docs.map(doc => ({
-                        id: doc.id,
-                        data: doc.data().basicdetails
-                    }))
-                    )
-
-                })
-            }
-            else {
-                console.log('user is not signed in to retrive username')
-            }
-
-        } catch (err) {
-            console.error(err);
-            alert("An error occured while fetching user data");
-        }
-
+    const fetchDetails = (state) => {
+        dispatch(FetchBasicDetails(state));
+        setFetchlist(state);
+     
     }
     const onLoadingClick = () => {
         setLoading(true);
@@ -139,7 +119,7 @@ function ResumeHome() {
         totalExperience: '',
         releventExperience: '',
         nationality: '',
-        dateofbirth: '',
+        dateofbirth: null,
         address: '',
         aboutme: '',
         carreerobj: '',
@@ -157,30 +137,31 @@ function ResumeHome() {
     const { control, formState: { errors }, handleSubmit, reset } = useForm({ defaultValues });
 
     const onSubmit = (data) => {
+        dispatch(AddBasicDetails(data));
         setFormData(data);
         console.log(data)
         setShowMessage(true);
 
-        try {
+        // try {
 
 
-            if (user) {
-                addDoc(collection(db, "nirresumebuilder" + user.uid), {
-                    userid: user.uid,
-                    basicdetails: data,
-                }).then(
-                    toast.success('red' + ' - ' + "Successfully Added"),
-                    reset()
-                ).catch(err => alert(err.message))
-            }
-            else {
-                console.log('user is not signed in to add todo to database');
-            }
+        //     if (user) {
+        //         addDoc(collection(db, "nirresumebuilder" + user.uid), {
+        //             userid: user.uid,
+        //             basicdetails: data,
+        //         }).then(
+        //             toast.success('red' + ' - ' + "Successfully Added"),
+        //             reset()
+        //         ).catch(err => alert(err.message))
+        //     }
+        //     else {
+        //         console.log('user is not signed in to add todo to database');
+        //     }
 
 
-        } catch (err) {
-            alert(err)
-        }
+        // } catch (err) {
+        //     alert(err)
+        // }
         //reset();
     };
 
@@ -188,9 +169,12 @@ function ResumeHome() {
         return errors[name] && <small className="p-error">{errors[name].message}</small>
     };
     const count = useSelector(selectCount);
+    const userlistitems = useSelector(userlist);
+    // console.log(userlistitems)
     const dispatch = useDispatch();
     const [incrementAmount, setIncrementAmount] = useState('2');
-
+    const mani = useSelector(state => state.FetchBasicDetails)
+    console.log(userlistitems)
     return (
         <React.Fragment>
             <Header />
@@ -578,6 +562,7 @@ function ResumeHome() {
               
             </section>
             <Dialog header="Header" visible={displayMaximizable} icons={myIcon} maximizable modal style={{ width: '50vw' }} footer={renderFooter('displayMaximizable')} onHide={() => onHide('displayMaximizable')}>
+{/* {userlistitems} */}
 {/* 
                 <div ref={reportTemplateRef}>
                     {
@@ -585,7 +570,7 @@ function ResumeHome() {
 
                     }
                 </div> */}
-                <div className="text-center">
+                {/* <div className="text-center">
                     <div className='row justify-content-center gap-3 mb-3'>
                         <button
                             className='btn btn-success mx-2'
@@ -625,9 +610,9 @@ function ResumeHome() {
                             Add Async
                         </button>
                     </div>
-                </div>
+                </div> */}
             </Dialog>
         </React.Fragment>
     )
 }
-export default ResumeHome;
+export default ResumeHome2;
