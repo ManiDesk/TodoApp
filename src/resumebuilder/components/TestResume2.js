@@ -19,7 +19,7 @@ import {
     incrementAsync,
     selectCount,
 } from '../../components/redux/reducer';
-import {AddBasicDetails,EditBasicDetails,UpdateBasicDetails,DeleteBasicDetails,FetchBasicDetails,userlist} from '../../components/redux/createSlice/basicDetailSlice'
+import { AddBasicDetails, EditBasicDetails, UpdateBasicDetails, DeleteBasicDetails, FetchBasicDetails, userlist } from '../../components/redux/createSlice/basicDetailSlice'
 
 //theme
 import "primereact/resources/themes/lara-light-indigo/theme.css";
@@ -70,11 +70,34 @@ function ResumeHome2() {
         fetchDetails();
         console.log(fetchDetails())
     }, [user, loader])
-    const fetchDetails = (state) => {
-        dispatch(FetchBasicDetails(state));
-        setFetchlist(state);
-     
-    }
+    const fetchDetails = () => {
+
+        try {
+    
+          if (user) {
+            const taskColRef = query(collection(db, 'MLMnirresumebuilder' + user.uid));
+   
+            onSnapshot(taskColRef, (snapshot) => {
+                const basicdata = snapshot.docs.map(doc => ({
+                    id: doc.id,                    
+                     data: doc.data()
+                   }))
+                   console.log('list' , basicdata)
+                  // return basicdata
+            dispatch(FetchBasicDetails([basicdata]))
+    
+            })
+          }
+          else {
+            console.log('user is not signed in to retrive username')
+          }
+    
+        } catch (err) {
+          console.error(err);
+          alert("An error occured while fetching user data");
+        }
+    
+      }
     const onLoadingClick = () => {
         setLoading(true);
 
@@ -174,7 +197,7 @@ function ResumeHome2() {
     const dispatch = useDispatch();
     const [incrementAmount, setIncrementAmount] = useState('2');
     const mani = useSelector(state => state.FetchBasicDetails)
-    console.log(userlistitems)
+    // console.log(userlistitems)
     return (
         <React.Fragment>
             <Header />
@@ -384,7 +407,7 @@ function ResumeHome2() {
                                                                 <span className="p-form">
                                                                     <label htmlFor="dateofbirth" className={classNames({ 'p-error': errors.dateofbirth })}>Date of birth</label>
                                                                     <Controller name="dateofbirth" control={control} rules={{ required: 'Date of birth is required.' }} render={({ field, fieldState }) => (
-                                                                        <Calendar id={field.name} value={field.value} className={`p-inputtext-sm ${classNames({ 'p-invalid': fieldState.invalid })}`} onChange={(e) => field.onChange(e.value)} dateFormat="dd/mm/yy" mask="99/99/9999" showIcon />
+                                                                        <Calendar  type="datetime-local" id={field.name} value={field.value} className={`p-inputtext-sm ${classNames({ 'p-invalid': fieldState.invalid })}`} onChange={(e) => field.onChange(e.value)} dateFormat="dd/mm/yy" mask="99/99/9999" showIcon />
                                                                     )} />
                                                                 </span>
                                                                 {getFormErrorMessage('dateofbirth')}
@@ -559,11 +582,11 @@ function ResumeHome2() {
                         </div>
                     </div>
                 </div>
-              
+
             </section>
             <Dialog header="Header" visible={displayMaximizable} icons={myIcon} maximizable modal style={{ width: '50vw' }} footer={renderFooter('displayMaximizable')} onHide={() => onHide('displayMaximizable')}>
-{/* {userlistitems} */}
-{/* 
+                {/* {userlistitems} */}
+                {/* 
                 <div ref={reportTemplateRef}>
                     {
                         fetchlists.map(fetchlist => <p key={fetchlist.data.name}>{fetchlist.data.name}</p>)
